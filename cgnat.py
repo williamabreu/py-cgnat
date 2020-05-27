@@ -9,11 +9,11 @@ import ipaddress
 
 
 def split_subnet(subnet, netmask):
-	if subnet.netmask == netmask:
-		return [subnet.exploded]
-	else:
-		branches = list(subnet.subnets())
-		return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
+    if subnet.netmask == netmask:
+        return [subnet.exploded]
+    else:
+        branches = list(subnet.subnets())
+        return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
 
 
 def main(private_ips, public_ip):

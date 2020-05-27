@@ -7,11 +7,11 @@ import ipaddress
 
 
 def split_subnet(subnet, netmask):
-	if subnet.netmask == netmask:
-		return [subnet]
-	else:
-		branches = list(subnet.subnets())
-		return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
+    if subnet.netmask == netmask:
+        return [subnet]
+    else:
+        branches = list(subnet.subnets())
+        return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
 
 
 def cgnat_reverse(cgnat_net, public_ip, client_ip, client_port):
