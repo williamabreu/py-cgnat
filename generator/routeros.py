@@ -1,4 +1,4 @@
-from vlsm import split_subnet
+from utils.vlsm import split_subnet
 from ipaddress import IPv4Network
 
 
