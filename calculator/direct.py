@@ -1,40 +1,41 @@
-import sys
-import ipaddress
-
-# uso:
-# python3 cgnat_direct.py <CGNAT-SUBNET> <PUBLIC-SUBNET> <CLIENT-IP>
-# python3 cgnat_direct.py 100.65.12.0/22 177.66.58.160/27 100.65.15.42
+from utils.vlsm import split_subnet
+from ipaddress import IPv4Address, IPv4Network
 
 
-def split_subnet(subnet, netmask):
-    if subnet.netmask == netmask:
-        return [subnet]
-    else:
-        branches = list(subnet.subnets())
-        return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
+def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: IPv4Address) -> dict:
+    """Calculates the public IP and port range from private IP given.
 
-
-if __name__ == '__main__':
-    cgnat_net = ipaddress.IPv4Network(sys.argv[1])
-    public_ip = ipaddress.IPv4Network(sys.argv[2])
-    client_ip = ipaddress.IPv4Address(sys.argv[3])
-    private_ips = split_subnet(cgnat_net, public_ip.netmask)
-
-    index = None # para descubrir a faixa de portas
+    Args:
+        private_net: Private address pool from CGNAT shared space address.
+        public_net: Public adddress pool target from netmap.
+        private_ip: Unique private IP from CGNAT to be converted to the public one.
+    
+    Returns:
+        Dict containing the public_ip and port_range for the query.
+    
+    Raises:
+        ValueError: When is not possible gathering the private-public IP association.
+    """
+    
+    private_ips = split_subnet(private_net, public_net.netmask)
+    index = None  # to discover the port range
 
     for i, pool in enumerate(private_ips):
-        if client_ip in pool:
+        if private_ip in pool:
             index = i
             break
+    
+    if index is None:
+        raise ValueError('Inconsistency between the parameters, check it out')
     
     port_base = 1536 + 2000 * index
     port_range = (port_base, port_base + 1999)
 
     pool = private_ips[index]
-    delta = int(client_ip) - int(pool.network_address)
-    client_public_ip = ipaddress.IPv4Address(int(public_ip.network_address) + delta)
+    delta = int(private_ip) - int(pool.network_address)
+    public_ip = IPv4Address(int(public_net.network_address) + delta)
 
-    print('IP CLIENTE:', client_ip)
-    print('IP PÚBLICO:', client_public_ip)
-    print('PORTAS:', port_range)
-
+    return {
+        'public_ip': public_ip,
+        'port_range': port_range
+    }
