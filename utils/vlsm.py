@@ -19,7 +19,7 @@ def split_subnet(network: IPv4Network, netmask: IPv4Address) -> list:
         raise ValueError('Impossible splitting to a netmask smaller than itself')
 
     if network.netmask == netmask:
-        return [network.exploded]
+        return [network]
     else:
         branches = list(network.subnets())
         return split_subnet(branches[0], netmask) + split_subnet(branches[1], netmask)
