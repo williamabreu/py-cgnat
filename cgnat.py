@@ -17,7 +17,7 @@ def split_subnet(subnet, netmask):
 
 
 def main(private_ips, public_ip):
-    print('/ip firewall nat')
+    string = '/ip firewall nat\n'
 
     port_index = 1536
     comment = True
@@ -26,10 +26,10 @@ def main(private_ips, public_ip):
         first_port = port_index
         last_port = port_index + 1999
         if comment:
-            print(f'add action=netmap chain=srcnat protocol=tcp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes comment="CGNAT TCP {public_ip}"')
+            string += f'add action=netmap chain=srcnat protocol=tcp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes comment="CGNAT TCP {public_ip}"\n'
             comment = False
         else:
-            print(f'add action=netmap chain=srcnat protocol=tcp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes')
+            string += f'add action=netmap chain=srcnat protocol=tcp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes\n'
         port_index += 2000
 
     port_index = 1536
@@ -39,24 +39,27 @@ def main(private_ips, public_ip):
         first_port = port_index
         last_port = port_index + 1999
         if comment:
-            print(f'add action=netmap chain=srcnat protocol=udp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes comment="CGNAT UDP {public_ip}"')
+            string += f'add action=netmap chain=srcnat protocol=udp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes comment="CGNAT UDP {public_ip}"\n'
             comment = False
         else:
-            print(f'add action=netmap chain=srcnat protocol=udp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes')
+            string += f'add action=netmap chain=srcnat protocol=udp src-address={private_ip} to-addresses={public_ip} to-ports={first_port}-{last_port} disabled=yes\n'
         port_index += 2000
 
     comment = True
 
     for private_ip in private_ips:
         if comment:
-            print(f'add action=netmap chain=srcnat src-address={private_ip} to-addresses={public_ip} disabled=yes comment="CGNAT IP {public_ip}"')
+            string += f'add action=netmap chain=srcnat src-address={private_ip} to-addresses={public_ip} disabled=yes comment="CGNAT ICMP {public_ip}"\n'
             comment = False
         else:    
-            print(f'add action=netmap chain=srcnat src-address={private_ip} to-addresses={public_ip} disabled=yes')
+            string += f'add action=netmap chain=srcnat src-address={private_ip} to-addresses={public_ip} disabled=yes\n'
+    
+    return string
 
 
 if __name__ == '__main__':
     cgnat_net = ipaddress.IPv4Network(sys.argv[1])
     public_ip = ipaddress.IPv4Network(sys.argv[2])
     private_ips = split_subnet(cgnat_net, public_ip.netmask)
-    main(private_ips, public_ip)
+    result = main(private_ips, public_ip)
+    print(result, end='')
