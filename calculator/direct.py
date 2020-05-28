@@ -14,9 +14,16 @@ def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: 
         Dict containing the public_ip and port_range for the query.
     
     Raises:
-        ValueError: When is not possible gathering the private-public IP association.
+        ValueError: When the private IP is out of the private net given.
+        ValueError: When the networks given do not satisfy the 1:32 ratio.
     """
     
+    if private_ip not in private_net:
+        raise ValueError('Private IP is out of the network given')
+
+    if public_net.prefixlen - private_net.prefixlen != 5:
+        raise ValueError('Only works to netmaps for 1:32 CGNAT ratio')
+
     private_ips = split_subnet(private_net, public_net.netmask)
     index = None  # to discover the port range
 
@@ -24,9 +31,6 @@ def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: 
         if private_ip in pool:
             index = i
             break
-    
-    if index is None:
-        raise ValueError('Inconsistency between the parameters, check it out')
     
     port_base = 1536 + 2000 * index
     port_range = (port_base, port_base + 1999)
