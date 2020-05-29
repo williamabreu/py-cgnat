@@ -2,7 +2,7 @@ from utils.vlsm import split_subnet
 from ipaddress import IPv4Network
 
 
-def main(private_net: IPv4Network, public_net: IPv4Network) -> str:
+def generate(private_net: IPv4Network, public_net: IPv4Network) -> str:
     """Generate CGNAT rules for RouterOS.
     
     Args:
