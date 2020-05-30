@@ -1,6 +1,8 @@
 from py_cgnat.calculator.direct import cgnat_direct
 from py_cgnat.calculator.reverse import cgnat_reverse
 from py_cgnat.utils.parser import parser
+import json
+import sys
 
 
 # Main program run at terminal.
@@ -12,14 +14,16 @@ def main():
         if keys == ['module', 'private_net', 'public_net', 'source_addr']:
             # Using translator module
             if type(args.source_addr) == tuple: # using --reverse
-                pass
+                query = cgnat_reverse(args.private_net, args.public_net, args.source_addr[0], args.source_addr[1])
             else: # using --direct
-                pass
+                query = cgnat_direct(args.private_net, args.public_net, args.source_addr)
+            print(json.dumps(query, default=lambda x: str(x)))
         else: # keys == ['module', 'output_file', 'private_net', 'public_net', 'target_platform']
             # Using generator module
             gen_call(args.output_file, args.private_net, args.public_net, args.target_platform)
     except BaseException as e:
-        print(e)
+        print('error:', e, file=sys.stderr)
+        sys.exit(1)
 
 
 # Call to run generator module.
