@@ -7,15 +7,15 @@ from py_cgnat.utils.parser import parser
 def main():
     args = parser.parse_args()
     kwargs = args._get_kwargs()
-    keys = sorted(key for key, _ in kwargs)    
+    keys = sorted(key for key, _ in kwargs)  
     try:
-        if keys == ['private_net', 'public_net', 'source_addr']:
+        if keys == ['module', 'private_net', 'public_net', 'source_addr']:
             # Using translator module
             if type(args.source_addr) == tuple: # using --reverse
                 pass
             else: # using --direct
                 pass
-        else: # keys == ['output_file', 'private_net', 'public_net', 'target_platform']
+        else: # keys == ['module', 'output_file', 'private_net', 'public_net', 'target_platform']
             # Using generator module
             gen_call(args.output_file, args.private_net, args.public_net, args.target_platform)
     except BaseException as e:
