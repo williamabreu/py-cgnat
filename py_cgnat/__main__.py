@@ -1,5 +1,5 @@
-from py_cgnat.calculator.direct import cgnat_direct
-from py_cgnat.calculator.reverse import cgnat_reverse
+from py_cgnat.translator.direct import cgnat_direct
+from py_cgnat.translator.reverse import cgnat_reverse
 from py_cgnat.utils.parser import parser
 import json
 import sys
