@@ -1,15 +1,6 @@
-from ipaddress import IPv4Network
 from py_cgnat.calculator.direct import cgnat_direct
 from py_cgnat.calculator.reverse import cgnat_reverse
 from py_cgnat.utils.parser import parser
-
-
-# Define the supported platforms.
-# - Uses the same name defined by the file inside 'generator' package
-# - Is used for auto calling the 'generate' function at runtime execution
-SUPPORTED_PLATFORMS = (
-    'routeros',
-)
 
 
 # Main program run at terminal.
