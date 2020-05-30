@@ -39,7 +39,7 @@ parser.add_argument('public_net',
 # END
 
 # Define the subparser for switching generator/translator module.
-subparsers = parser.add_subparsers(title='modules')
+subparsers = parser.add_subparsers(title='modules', dest='module', required=True)
 
 # Define the subparser for selecting generator module.
 # BEGIN
