@@ -1,8 +1,9 @@
 from py_cgnat.utils.vlsm import split_subnet
 from ipaddress import IPv4Address, IPv4Network
+from collections import OrderedDict
 
 
-def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: IPv4Address) -> dict:
+def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: IPv4Address) -> OrderedDict:
     """Calculates the public IP and port range from private IP given.
 
     Args:
@@ -39,7 +40,4 @@ def cgnat_direct(private_net: IPv4Network, public_net: IPv4Network, private_ip: 
     delta = int(private_ip) - int(pool.network_address)
     public_ip = IPv4Address(int(public_net.network_address) + delta)
 
-    return {
-        'public_ip': public_ip,
-        'port_range': port_range
-    }
+    return OrderedDict(public_ip=public_ip, port_range=port_range)

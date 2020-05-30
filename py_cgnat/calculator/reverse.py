@@ -1,8 +1,9 @@
 from py_cgnat.utils.vlsm import split_subnet
 from ipaddress import IPv4Address, IPv4Network
+from collections import OrderedDict
 
 
-def cgnat_reverse(private_net: IPv4Network, public_net: IPv4Network, public_ip: IPv4Address, public_port: int) -> dict:
+def cgnat_reverse(private_net: IPv4Network, public_net: IPv4Network, public_ip: IPv4Address, public_port: int) -> OrderedDict:
     """Calculates the private IP and port range from public IP given.
 
     Args:
@@ -39,7 +40,4 @@ def cgnat_reverse(private_net: IPv4Network, public_net: IPv4Network, public_ip: 
     delta = int(public_ip) - int(public_net.network_address)
     private_ip = IPv4Address(int(pool.network_address) + delta)
 
-    return {
-        'private_ip': private_ip,
-        'port_range': port_range
-    }        
+    return OrderedDict(private_ip=private_ip, port_range=port_range)      
