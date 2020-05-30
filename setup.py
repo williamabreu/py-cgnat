@@ -1,9 +1,8 @@
 # Usage: 
 #   python3 setup.py sdist bdist_wheel
 
-import setuptools
-
 from py_cgnat import __version__
+import setuptools
 
 
 setuptools.setup(
@@ -26,8 +25,13 @@ setuptools.setup(
         ]
     },
     classifiers=[
-        'Programming Language :: Python :: 3',
+        'Environment :: Console',
+        'Intended Audience :: System Administrators',
+        'Programming Language :: Python :: 3 :: Only',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+        'Topic :: System :: Networking :: Firewalls',
+        'Topic :: Utilities',
     ],
 )
