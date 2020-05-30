@@ -64,7 +64,7 @@ parser_translator = subparsers.add_parser('trans',
     help='Select the CGNAT translator module', 
 )
 
-group = parser_translator.add_mutually_exclusive_group()
+group = parser_translator.add_mutually_exclusive_group(required=True)
 
 group.add_argument('-d', '--direct', 
     help='Set the translator in direct mode (private -> public)', 
