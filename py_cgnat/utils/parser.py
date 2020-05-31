@@ -80,20 +80,3 @@ group.add_argument('-r', '--reverse',
     type=IPandPort,
 )
 # END
-
-
-if __name__ == '__main__':
-    # Debug command-line syntax.
-    parser.print_usage()
-    parser_generator.print_usage()
-    parser_translator.print_usage()
-
-    print( parser.parse_args() )
-    
-    # Usage examples:
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 gen routeros output.rsc
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 gen routeros 
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 trans --direct 100.64.2.15
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 trans --reverse 203.0.113.20:13578
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 trans -d 100.64.2.15
-    # py-cgnat 100.64.0.0/22 203.0.113.0/27 trans -r 203.0.113.20:13578
