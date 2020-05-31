@@ -28,7 +28,7 @@ def main():
 
 # Call to run generator module.
 def gen_call(output_file, private_net, public_net, target_platform):
-    generate = __import__(f'py_cgnat.generator.{target_platform}', fromlist=['generate']).generate    
+    generate = __import__(f'pycgnat.generator.{target_platform}', fromlist=['generate']).generate    
     rules = generate(private_net, public_net)
     if output_file:
         with open(output_file, 'w') as fp: fp.write(rules)
