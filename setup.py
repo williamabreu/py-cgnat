@@ -4,7 +4,7 @@
 #   python3 setup.py sdist bdist_wheel
 # 
 # -- Run unit tests:
-#  python3 setup.py test
+#   python3 setup.py test
 
 
 from pycgnat import __version__
@@ -23,9 +23,10 @@ setuptools.setup(
     url='https://github.com/williamabreu/py-cgnat',
     install_requires=open('requirements.txt').read().splitlines(),
     platforms='any',
-    packages=setuptools.find_packages('.', exclude=('tests',)),
+    packages=setuptools.find_packages('.', exclude=('pycgnat.tests',)),
     python_requires='>=3.7',
-    test_suite="pycgnat.tests",
+    test_suite='pycgnat.tests',
+    keywords='netmap cgnat rfc6598 routeros',
     entry_points={
         'console_scripts': [
             'pycgnat=pycgnat.__main__:main'
