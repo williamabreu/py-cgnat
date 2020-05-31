@@ -1,5 +1,11 @@
 # Usage: 
+#
+# -- Build the project for distribution:
 #   python3 setup.py sdist bdist_wheel
+# 
+# -- Run unit tests:
+#  python3 setup.py test
+
 
 from py_cgnat import __version__
 import setuptools
@@ -19,6 +25,7 @@ setuptools.setup(
     platforms='any',
     packages=setuptools.find_packages('.', exclude=('tests',)),
     python_requires='>=3.7',
+    test_suite="py_cgnat.tests",
     entry_points={
         'console_scripts': [
             'py-cgnat=py_cgnat.__main__:main'
