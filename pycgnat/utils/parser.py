@@ -1,13 +1,6 @@
+from pycgnat.settings import SUPPORTED_PLATFORMS
 from argparse import ArgumentParser, ArgumentTypeError
 from ipaddress import IPv4Address, IPv4Network
-
-
-# Define the supported platforms.
-# - Uses the same name defined by the file inside 'generator' package
-# - Is used for auto calling the 'generate' function at runtime execution
-SUPPORTED_PLATFORMS = (
-    'routeros',
-)
 
 
 # Abstract type for parsing IP:port format into tuple.
