@@ -20,6 +20,11 @@ class TestSplitSubnet(unittest.TestCase):
             with self.subTest(i=i):
                 self.assertRaises(ValueError, split_subnet, IPv4Network('10.0.0.0/22'), IPv4Address(f'255.255.255.{i}'))
 
+    def test_smaller_netmask(self):
+        self.assertRaises(ValueError, split_subnet, IPv4Network('10.0.0.0/24'), IPv4Address(f'255.255.254.0'))
+        self.assertRaises(ValueError, split_subnet, IPv4Network('10.0.0.0/24'), IPv4Address(f'255.255.252.0'))
+        self.assertRaises(ValueError, split_subnet, IPv4Network('10.0.0.0/24'), IPv4Address(f'255.255.0.0'))
+
     def test_split_subnet(self):
         self.assertEqual(
             split_subnet(IPv4Network('10.0.0.0/27'), IPv4Address('255.255.255.240')),
