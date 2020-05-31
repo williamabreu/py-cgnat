@@ -19,6 +19,9 @@ def cgnat_reverse(private_net: IPv4Network, public_net: IPv4Network, public_ip: 
         ValueError: When the public IP is out of the public net given.
         ValueError: When the networks given do not satisfy the 1:32 ratio.
     """
+
+    if not 1536 <= public_port <= 65535:
+        raise ValueError('Port index is out of range 1536-65535') 
     
     if public_ip not in public_net:
         raise ValueError('Public IP is out of the network given')
