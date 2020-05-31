@@ -7,12 +7,12 @@
 #  python3 setup.py test
 
 
-from py_cgnat import __version__
+from pycgnat import __version__
 import setuptools
 
 
 setuptools.setup(
-    name='py-cgnat',
+    name='pycgnat',
     version=__version__,
     license='MIT License',
     author='William Abreu',
@@ -25,10 +25,10 @@ setuptools.setup(
     platforms='any',
     packages=setuptools.find_packages('.', exclude=('tests',)),
     python_requires='>=3.7',
-    test_suite="py_cgnat.tests",
+    test_suite="pycgnat.tests",
     entry_points={
         'console_scripts': [
-            'py-cgnat=py_cgnat.__main__:main'
+            'pycgnat=pycgnat.__main__:main'
         ]
     },
     classifiers=[

@@ -1,7 +1,4 @@
-# Usage:
-#   python3 -m unittest -v py_cgnat.tests.vlsm_test
-
-from py_cgnat.utils.vlsm import split_subnet
+from pycgnat.utils.vlsm import split_subnet
 from ipaddress import IPv4Address, IPv4Network
 import unittest
 

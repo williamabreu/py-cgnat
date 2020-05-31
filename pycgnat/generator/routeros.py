@@ -1,4 +1,4 @@
-from py_cgnat.utils.vlsm import split_subnet
+from pycgnat.utils.vlsm import split_subnet
 from ipaddress import IPv4Network
 
 

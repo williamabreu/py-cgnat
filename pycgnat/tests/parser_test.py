@@ -1,7 +1,4 @@
-# Usage: 
-#   python3 -m unittest -v py_cgnat.tests.parser_test
-
-from py_cgnat.utils.parser import parser
+from pycgnat.utils.parser import parser
 from argparse import Namespace
 from ipaddress import IPv4Network, IPv4Address
 import unittest

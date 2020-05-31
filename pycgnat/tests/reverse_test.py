@@ -1,7 +1,4 @@
-# Usage: 
-#   python3 -m unittest -v py_cgnat.tests.reverse_test
-
-from py_cgnat.translator.reverse import cgnat_reverse
+from pycgnat.translator.reverse import cgnat_reverse
 from ipaddress import IPv4Network, IPv4Address
 from collections import OrderedDict
 import unittest
