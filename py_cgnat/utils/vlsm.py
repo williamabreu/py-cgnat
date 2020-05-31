@@ -12,11 +12,11 @@ def split_subnet(network: IPv4Network, netmask: IPv4Address) -> list:
         Resulted subnets listing.
 
     Raises:
-        ValueError: When netmask given is smaller than the source network.
+        ValueError: When netmask given is invalid or smaller than the source network.
     """
 
     if network.netmask > netmask:
-        raise ValueError('Impossible splitting to a netmask smaller than itself')
+        raise ValueError('Impossible splitting to a invalid netmask ou smaller than itself')
 
     if network.netmask == netmask:
         return [network]
