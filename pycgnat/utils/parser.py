@@ -7,15 +7,17 @@ from pycgnat.settings import SUPPORTED_PLATFORMS
 
 # Abstract type for parsing IP:port format into tuple.
 def IPandPort(string: str) -> Tuple[IPv4Address, int]:  # noqa
+    ip: IPv4Address
+    port: int
     try:
-        ip, port = string.split(":")
+        ip, port = string.split(":")  # type: ignore
         ip = IPv4Address(ip)
         port = int(port)
-        return ip, port
     except Exception:
         raise ArgumentTypeError(
             f"{string} is not in format <IPv4Address>:<int>"
         )
+    return ip, port
 
 
 # Define the top-level parser for cli arguments.

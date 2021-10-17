@@ -1,11 +1,19 @@
 import unittest
-from argparse import Namespace
+from argparse import ArgumentTypeError, Namespace
 from ipaddress import IPv4Address, IPv4Network
 
-from pycgnat.utils.parser import parser
+from pycgnat.utils.parser import IPandPort, parser
 
 
 class TestParser(unittest.TestCase):
+    def test_ip_and_port_type_invalid(self):
+        self.assertRaises(ArgumentTypeError, IPandPort, "300.64.0.1:1234")
+
+    def test_ip_and_port_type_valid(self):
+        self.assertEqual(
+            IPandPort("100.64.0.1:1234"), (IPv4Address("100.64.0.1"), 1234)
+        )
+
     def test_cli_toplevel_invalid(self):
         self.assertRaises(SystemExit, parser.parse_args, "".split())
         self.assertRaises(
