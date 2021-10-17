@@ -4,7 +4,7 @@ Python module for generating CGNAT rules using netmap
 
 ## Brief
 
-Python library and CLI program for generating firewall rules to deploy Carrier-Grade NAT, besides translating a given IP and port to its private address and vice versa. The methodology consists in building netmap rules at 1:32 public-private ratio, mapping a range of 2.000 ports for each client. Works for any netmask, since that follow the 1:32 ratio:
+This is a Python library and CLI program for generating firewall rules to deploy Carrier-Grade NAT, besides translating a given IP and port to its private address and vice versa. The methodology consists in building netmap rules at 1:32 public-private ratio, mapping a range of 2.000 ports for each client. Works for any netmask, since that follow the 1:32 ratio:
 
 | Private prefix | Public prefix | N. of clients  |
 | :------------: |:-------------:| :-------------:|
@@ -75,8 +75,16 @@ dic = cgnat_reverse(privnet, pubnet, IPv4Address('203.0.113.20'), 13578)
 print(dic['private_ip'])
 ```
 
-The full ```pycgnat```'s documentation is written in the source-code. 
+The full ```pycgnat```'s documentation is written in the source-code.
 
 ## Future works
 
 - Add support for other platfoms (I'm using MikroTik for while, so this is the reason for only supporting it at first version).
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

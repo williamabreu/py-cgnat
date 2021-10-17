@@ -1,0 +1,58 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
+# To update the hooks, run "pre-commit autoupdate"
+
+default_language_version:
+    python: python3.7
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+        exclude: requirements.txt
+
+  - repo: https://github.com/ambv/black
+    rev: 21.9b0
+    hooks:
+      - id: black
+        args: [--line-length=79]
+
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+      - id: flake8
+
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.9.3
+    hooks:
+      - id: isort
+        args: [--profile, black]
+
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.1.1
+    hooks:
+      - id: pydocstyle
+
+  - repo: local
+    hooks:
+      - id: mypy
+        language: system
+        name: mypy
+        entry: sh -c "mypy"
+        stages: [commit]
+
+  - repo: local
+    hooks:
+      - id: requirements
+        language: system
+        name: Check requirements are up to date.
+        entry: sh -c "poetry export --without-hashes | diff requirements.txt -"
+        stages: [ commit ]
+      - id: poetry-export-dev
+        language: system
+        name: Check dev requirements are up to date.
+        entry: sh -c "poetry export --dev --without-hashes | diff requirements.dev.txt -"
+        stages: [ commit ]
