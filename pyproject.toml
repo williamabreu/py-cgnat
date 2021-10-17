@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pycgnat"
-version = "1.0dev1"
+version = "1.0.0"
 description = "Python module for generating CGNAT rules using netmap"
 authors = ["William Abreu <contato@williamabreu.net>"]
 license = "MIT License"
