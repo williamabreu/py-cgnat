@@ -23,9 +23,9 @@ setuptools.setup(
     url="https://github.com/williamabreu/py-cgnat",
     install_requires=open("requirements.txt").read().splitlines(),
     platforms="any",
-    packages=setuptools.find_packages(".", exclude=(f"{src.__name__}.tests",)),
+    packages=setuptools.find_packages(".", exclude=("tests", "tests.*")),
     python_requires=">=3.7",
-    test_suite=f"{src.__name__}.tests",
+    test_suite="tests",
     keywords="netmap cgnat rfc6598 routeros",
     entry_points={
         "console_scripts": [f"pycgnat={src.__name__}.__main__:main"]
