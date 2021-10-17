@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "pycgnat"
+version = "1.0dev1"
+description = "Python module for generating CGNAT rules using netmap"
+authors = ["William Abreu <contato@williamabreu.net>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+mypy = "^0.910"
+pydocstyle = "^6.1.1"
+pre-commit = "^2.15.0"
+black = "^21.9b0"
+flake8 = "^4.0.1"
+isort = "^5.9.3"
+pyclean = "^2.0.0"
+toml = "^0.10.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# See: https://mypy.readthedocs.io/en/stable/config_file.html
+
+[tool.mypy]
+exclude = "(\\..*|env|venv|__pycache__|build|dist)/$"
+files = ["pycgnat"]
+python_version = "3.7"
+strict_optional = false
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+show_error_codes = true
+pretty = true
