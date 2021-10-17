@@ -1,6 +1,7 @@
-import pycgnat as src
 import setuptools
 import toml
+
+import pycgnat as src
 
 config = toml.load("pyproject.toml")["tool"]["poetry"]
 config["author"] = ", ".join(
